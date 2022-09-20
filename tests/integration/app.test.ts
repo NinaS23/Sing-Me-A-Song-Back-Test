@@ -29,7 +29,6 @@ describe("test Route POST /recommendations", () => {
         expect(findRecommendation).not.toBeUndefined();
         expect(createRecommendation.statusCode).toBe(201); 
     });
-    
 });
 
 describe("test Route POST /recommendations/:id/upvote", () => {
