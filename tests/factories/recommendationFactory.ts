@@ -20,3 +20,9 @@ export async function createPreExistentRecommendation() {
   }
   await prisma.recommendation.createMany({ data: allRecommendations });
 }
+
+export async function findRecommendation(name){
+  return await prisma.recommendation.findUnique({
+    where: { name  }
+  });
+}
