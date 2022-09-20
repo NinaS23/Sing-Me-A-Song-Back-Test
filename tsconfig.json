@@ -2,10 +2,15 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "module": "es6",
+    "target": "ES6",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "outDir": "dist"
   },
   "ts-node": {
     "esm": true
-  }
+  },
+  "exclude": ["node_modules"]
 }
