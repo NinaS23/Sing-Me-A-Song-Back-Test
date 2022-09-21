@@ -148,7 +148,15 @@ describe("test Route GET /recommendations/:id", () => {
             .get(`/recommendations/${id}`)
         expect(findRecommendationById.body.name).toEqual(getRecommendation.name)
 
-    })
+    });
+
+    it("get recommendation with a inexistent id", async () => {
+        const id = 1
+        const findRecommendationById = await server
+            .get(`/recommendations/${id}`)
+        expect(findRecommendationById.statusCode).toBe(404)
+
+    });
 });
 
 describe("test Route GET /recommendations/random", () => {
