@@ -104,7 +104,6 @@ describe("test Route GET /recommendations/:id", () => {
 });
 
 describe("test Route GET /recommendations/random", () => {
-
     it("should get a random recommendation 70%", async () => {
         await recommendationFactory.updateXScores(20, 5);
         await recommendationFactory.updateXScores(1, 20);
