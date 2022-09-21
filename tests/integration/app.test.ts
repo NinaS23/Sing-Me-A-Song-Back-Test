@@ -25,14 +25,29 @@ describe("test Route POST /recommendations", () => {
     });
 
     it("create a recommendation , send incorrect format , it should return 422", async () => {
-       const wrongData = await recommendationFactory.wrongDataRecommendation()
-       const isRecommendationUnique = await recommendationFactory.findRecommendation( wrongData.name)
-       expect(isRecommendationUnique).toBeNull()
-       const createRecommendation = await server
-       .post("/recommendations")
-       .send(wrongData)
-       console.log(createRecommendation.statusCode)
-       expect(createRecommendation.statusCode).toBe(422);
+        const wrongData = await recommendationFactory.wrongDataRecommendation()
+        const isRecommendationUnique = await recommendationFactory.findRecommendation(wrongData.name)
+        expect(isRecommendationUnique).toBeNull()
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(wrongData)
+        expect(createRecommendation.statusCode).toBe(422);
+    });
+    it("create a recommendation ,with a existent name , it should return 409", async () => {
+        const getRecommendationData = await recommendationFactory.existentNameRecommendation()
+        const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendationData.name)
+        expect(isRecommendationUnique).toBeNull()
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(getRecommendationData)
+        expect(createRecommendation.statusCode).toBe(201);
+        const existentNameRecommendation = await recommendationFactory.existentNameRecommendation()
+        const notUnique = await recommendationFactory.findRecommendation(existentNameRecommendation.name)
+        expect(notUnique).not.toBeNull()
+        const createAexistentRecommendation = await server
+            .post("/recommendations")
+            .send(existentNameRecommendation)
+        expect(createAexistentRecommendation.statusCode).toBe(409)
     });
 });
 

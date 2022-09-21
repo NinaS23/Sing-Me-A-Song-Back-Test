@@ -17,6 +17,12 @@ export async function wrongDataRecommendation() {
   };
 }
 
+export async function existentNameRecommendation() {
+  return {
+    name: "lolapaloozaaaa",
+    youtubeLink: `https://www.youtube.com/watch?v=${faker.random.alphaNumeric(11)}`,
+  };
+}
 
 export async function createPreExistentRecommendation() {
   const allRecommendations = []
