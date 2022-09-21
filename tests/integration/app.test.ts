@@ -1,4 +1,5 @@
 import app from "../../src/app";
+import { Recommendation } from "@prisma/client";
 import supertest from "supertest";
 import * as scenarioFactory from "../factories/scenarioFactory";
 import * as recommendationFactory from "../factories/recommendationFactory";
@@ -74,6 +75,13 @@ describe("test Route GET /recommendations", () => {
         const getRecommendations = await server
             .get("/recommendations")
         expect(getRecommendations.body.length).toEqual(9)
+        getRecommendations.body.forEach((recommendation: Recommendation) => {
+            expect(recommendation).not.toBe(null);
+            expect(recommendation.id).not.toBe(null);
+            expect(recommendation.name).not.toBe(null);
+            expect(recommendation.score).not.toBe(null);
+            expect(recommendation.youtubeLink).not.toBe(null);
+        });
     })
 });
 
