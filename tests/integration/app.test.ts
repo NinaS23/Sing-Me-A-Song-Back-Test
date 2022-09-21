@@ -73,7 +73,7 @@ describe("test Route GET /recommendations", () => {
         expect(getAll.length).toEqual(9)
         const getRecommendations = await server
             .get("/recommendations")
-        expect(getRecommendations.body).toBeInstanceOf(Array)
+        expect(getRecommendations.body.length).toEqual(9)
     })
 });
 
