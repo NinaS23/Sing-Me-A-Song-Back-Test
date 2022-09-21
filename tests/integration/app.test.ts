@@ -121,8 +121,14 @@ describe("test Route GET /recommendations", () => {
             expect(recommendation.name).not.toBe(null);
             expect(recommendation.score).not.toBe(null);
             expect(recommendation.youtubeLink).not.toBe(null);
-        });
-    })
+        });  
+    });
+
+    it("get all recommendations with nothing inside database, should returns nothing", async () => {
+        const getRecommendations = await server
+            .get("/recommendations")
+        expect(getRecommendations.body.length).toEqual(0)
+    });
 });
 
 describe("test Route GET /recommendations/:id", () => {
