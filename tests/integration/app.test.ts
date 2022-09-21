@@ -98,9 +98,9 @@ describe("test Route GET /recommendations/:id", () => {
         const findRecommendation = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(findRecommendation).not.toBeNull();
         const id = findRecommendation.id
-        const getRecommendations = await server
+        const findRecommendationById = await server
             .get(`/recommendations/${id}`)
-        expect(getRecommendations.body.name).toEqual(getRecommendation.name)
+        expect(findRecommendationById.body.name).toEqual(getRecommendation.name)
 
     })
 });
