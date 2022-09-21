@@ -4,8 +4,6 @@ import supertest from "supertest";
 import * as scenarioFactory from "../factories/scenarioFactory";
 import * as recommendationFactory from "../factories/recommendationFactory";
 
-
-
 beforeEach(async () => {
     await scenarioFactory.deleteAllData();
 });
@@ -106,7 +104,26 @@ describe("test Route GET /recommendations/:id", () => {
 });
 
 describe("test Route GET /recommendations/random", () => {
-    it.todo("")
+
+    it("should get a random recommendation 70%", async () => {
+        await recommendationFactory.updateXScores(20, 5);
+        await recommendationFactory.updateXScores(1, 20);
+        const result = await server
+            .get("/recommendations/random");
+        expect(result.body.score).toBeGreaterThan(10);
+    });
+
+    it("should get a random recommendation 30%", async () => {
+        await recommendationFactory.updateXScores(40, 20);
+        await recommendationFactory.updateXScores(1, 5);
+        const result = await server
+            .get("/recommendations/random");
+        expect(result.body.score).toBeLessThanOrEqual(10);
+    });
+    it("no recommendations existent , should return 404", async () => {
+        const result = await server.get("/recommendations/random");
+        expect(result.statusCode).toBe(404);
+    });
 });
 
 describe("test Route GET /recommendations/top/:amount", () => {
