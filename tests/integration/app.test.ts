@@ -3,6 +3,7 @@ import supertest from "supertest";
 import * as scenarioFactory from "../factories/scenarioFactory";
 import * as recommendationFactory from "../factories/recommendationFactory";
 
+
 beforeEach(async () => {
     await scenarioFactory.deleteAllData();
 });
@@ -15,15 +16,36 @@ describe("test Route POST /recommendations", () => {
         const getRecommendation = await recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(isRecommendationUnique).toBeNull()
-        const createRecommendation = await server.post("/recommendations").send(getRecommendation)
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(getRecommendation)
         const findRecommendation = await recommendationFactory.findRecommendation(getRecommendation.name)
-        expect(findRecommendation).not.toBeUndefined();
+        expect(findRecommendation).not.toBeNull();
         expect(createRecommendation.statusCode).toBe(201);
     });
 });
 
 describe("test Route POST /recommendations/:id/upvote", () => {
-    it.todo("")
+    it("update vote with a valid id", async () =>{
+        await recommendationFactory.createPreExistentRecommendation();
+        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(isRecommendationUnique).toBeNull()
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(getRecommendation)
+        expect(createRecommendation.statusCode).toBe(201);
+        const findRecommendation = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(findRecommendation).not.toBeNull();
+        const id = findRecommendation.id
+        const updateVote = await server
+            .post(`/recommendations/${id}/upvote`)
+            .send("increment")
+        expect(updateVote.statusCode).toBe(200)
+
+
+        
+    })
 });
 
 describe("test Route POST /recommendations/:id/downvote", () => {

@@ -9,3 +9,4 @@ export async function deleteAllData() {
 export async function disconnectPrisma() {
     await prisma.$disconnect();
 }
+
