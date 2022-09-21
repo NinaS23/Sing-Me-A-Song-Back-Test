@@ -86,7 +86,23 @@ describe("test Route GET /recommendations", () => {
 });
 
 describe("test Route GET /recommendations/:id", () => {
-    it.todo("")
+    it("get recommendation with a existent id", async () => {
+        await recommendationFactory.createPreExistentRecommendation();
+        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(isRecommendationUnique).toBeNull()
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(getRecommendation)
+        expect(createRecommendation.statusCode).toBe(201);
+        const findRecommendation = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(findRecommendation).not.toBeNull();
+        const id = findRecommendation.id
+        const getRecommendations = await server
+            .get(`/recommendations/${id}`)
+        expect(getRecommendations.body.name).toEqual(getRecommendation.name)
+
+    })
 });
 
 describe("test Route GET /recommendations/random", () => {
