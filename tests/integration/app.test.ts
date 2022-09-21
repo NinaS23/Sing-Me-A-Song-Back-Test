@@ -112,7 +112,6 @@ describe("test Route GET /recommendations/random", () => {
             .get("/recommendations/random");
         expect(result.body.score).toBeGreaterThan(10);
     });
-
     it("should get a random recommendation 30%", async () => {
         await recommendationFactory.updateXScores(40, 20);
         await recommendationFactory.updateXScores(1, 5);
