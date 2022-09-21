@@ -41,10 +41,7 @@ describe("test Route POST /recommendations/:id/upvote", () => {
         const updateVote = await server
             .post(`/recommendations/${id}/upvote`)
             .send("increment")
-        expect(updateVote.statusCode).toBe(200)
-
-
-        
+        expect(updateVote.statusCode).toBe(200)  
     })
 });
 
