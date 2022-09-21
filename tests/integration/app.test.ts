@@ -26,7 +26,7 @@ describe("test Route POST /recommendations", () => {
 });
 
 describe("test Route POST /recommendations/:id/upvote", () => {
-    it("update vote with a valid id", async () =>{
+    it("update vote with a valid id for upvote", async () =>{
         await recommendationFactory.createPreExistentRecommendation();
         const getRecommendation = await recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
@@ -46,7 +46,23 @@ describe("test Route POST /recommendations/:id/upvote", () => {
 });
 
 describe("test Route POST /recommendations/:id/downvote", () => {
-    it.todo("")
+    it("update vote with a valid id for downvote", async () =>{
+        await recommendationFactory.createPreExistentRecommendation();
+        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(isRecommendationUnique).toBeNull()
+        const createRecommendation = await server
+            .post("/recommendations")
+            .send(getRecommendation)
+        expect(createRecommendation.statusCode).toBe(201);
+        const findRecommendation = await recommendationFactory.findRecommendation(getRecommendation.name)
+        expect(findRecommendation).not.toBeNull();
+        const id = findRecommendation.id
+        const downVote = await server
+            .post(`/recommendations/${id}/downvote`)
+            .send("decrement")
+        expect(downVote.statusCode).toBe(200)  
+    })
 });
 
 describe("test Route GET /recommendations", () => {
