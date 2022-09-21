@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === 'test') {
     app.use(e2eRouter);
     
   }
-
   
 app.use("/recommendations", recommendationRouter);
 app.use(errorHandlerMiddleware);

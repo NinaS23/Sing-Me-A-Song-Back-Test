@@ -26,7 +26,7 @@ describe("test Route POST /recommendations", () => {
 });
 
 describe("test Route POST /recommendations/:id/upvote", () => {
-    it("update vote with a valid id for upvote", async () =>{
+    it("update vote with a valid id for upvote", async () => {
         await recommendationFactory.createPreExistentRecommendation();
         const getRecommendation = await recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
@@ -41,12 +41,12 @@ describe("test Route POST /recommendations/:id/upvote", () => {
         const updateVote = await server
             .post(`/recommendations/${id}/upvote`)
             .send("increment")
-        expect(updateVote.statusCode).toBe(200)  
+        expect(updateVote.statusCode).toBe(200)
     })
 });
 
 describe("test Route POST /recommendations/:id/downvote", () => {
-    it("update vote with a valid id for downvote", async () =>{
+    it("update vote with a valid id for downvote", async () => {
         await recommendationFactory.createPreExistentRecommendation();
         const getRecommendation = await recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
@@ -61,7 +61,7 @@ describe("test Route POST /recommendations/:id/downvote", () => {
         const downVote = await server
             .post(`/recommendations/${id}/downvote`)
             .send("decrement")
-        expect(downVote.statusCode).toBe(200)  
+        expect(downVote.statusCode).toBe(200)
     })
 });
 
@@ -105,27 +105,40 @@ describe("test Route GET /recommendations/:id", () => {
 
 describe("test Route GET /recommendations/random", () => {
     it("should get a random recommendation 70%", async () => {
-        await recommendationFactory.updateXScores(20, 5);
+        await recommendationFactory.updateXScores(4, 5);
         await recommendationFactory.updateXScores(1, 20);
         const result = await server
             .get("/recommendations/random");
         expect(result.body.score).toBeGreaterThan(10);
     });
     it("should get a random recommendation 30%", async () => {
-        await recommendationFactory.updateXScores(40, 20);
+        await recommendationFactory.updateXScores(4, 20);
         await recommendationFactory.updateXScores(1, 5);
         const result = await server
             .get("/recommendations/random");
         expect(result.body.score).toBeLessThanOrEqual(10);
     });
     it("no recommendations existent , should return 404", async () => {
-        const result = await server.get("/recommendations/random");
+        const result = await server
+            .get("/recommendations/random");
         expect(result.statusCode).toBe(404);
     });
 });
 
 describe("test Route GET /recommendations/top/:amount", () => {
-    it.todo("")
+    it("should get a amount number of recommendations ordered by top scores", async () => {
+        const topScore = 30;
+        const mediumScore = 20;
+        const lowScore = 0;
+        await recommendationFactory.updateXScores(5, topScore);
+        await recommendationFactory.updateXScores(5, mediumScore);
+        await recommendationFactory.updateXScores(5, lowScore);
+        const amount = 10
+        const result = await server
+            .get(`/recommendations/top/${amount}`);
+        console.log(result.body)
+        expect(result.body.length).toBe(amount);
+    });
 });
 
 
