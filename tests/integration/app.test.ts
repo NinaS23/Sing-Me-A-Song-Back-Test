@@ -97,6 +97,14 @@ describe("test Route POST /recommendations/:id/downvote", () => {
             .send("decrement")
         expect(downVote.statusCode).toBe(200)
     })
+
+    it("update vote with a invalid id,should returns 404", async () => {
+        const id = 10
+        const updateVote = await server
+            .post(`/recommendations/${id}/downvote`)
+            .send("increment")
+        expect(updateVote.statusCode).toBe(404)
+    })
 });
 
 describe("test Route GET /recommendations", () => {
