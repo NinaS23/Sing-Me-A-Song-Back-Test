@@ -23,6 +23,17 @@ describe("test Route POST /recommendations", () => {
         expect(findRecommendation).not.toBeNull();
         expect(createRecommendation.statusCode).toBe(201);
     });
+
+    it("create a recommendation , send incorrect format , it should return 422", async () => {
+       const wrongData = await recommendationFactory.wrongDataRecommendation()
+       const isRecommendationUnique = await recommendationFactory.findRecommendation( wrongData.name)
+       expect(isRecommendationUnique).toBeNull()
+       const createRecommendation = await server
+       .post("/recommendations")
+       .send(wrongData)
+       console.log(createRecommendation.statusCode)
+       expect(createRecommendation.statusCode).toBe(422);
+    });
 });
 
 describe("test Route POST /recommendations/:id/upvote", () => {
@@ -136,7 +147,6 @@ describe("test Route GET /recommendations/top/:amount", () => {
         const amount = 10
         const result = await server
             .get(`/recommendations/top/${amount}`);
-        console.log(result.body)
         expect(result.body.length).toBe(amount);
     });
 });

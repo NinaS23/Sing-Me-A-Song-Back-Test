@@ -10,6 +10,14 @@ export async function createDataRecommendation() {
   };
 }
 
+export async function wrongDataRecommendation() {
+  return {
+    name: faker.name.fullName(),
+    youtubeLink: `http://www.google.com/${faker.random.alphaNumeric(11)}`,
+  };
+}
+
+
 export async function createPreExistentRecommendation() {
   const allRecommendations = []
   for (let i = 0; i < 9; i++) {
