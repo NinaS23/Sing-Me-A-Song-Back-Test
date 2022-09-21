@@ -15,7 +15,6 @@ app.use(express.json());
 
 
 if (process.env.NODE_ENV === 'test') {
-  console.log("Oi")
     app.use(e2eRouter);
     
   }
