@@ -6,14 +6,18 @@ import { errorHandlerMiddleware } from "./middlewares/errorHandlerMiddleware.js"
 import recommendationRouter from "./routers/recommendationRouter.js";
 import e2eRouter from "./routers/test2e2Router.js";
 
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 if (process.env.NODE_ENV === 'test') {
+  console.log("Oi")
     app.use(e2eRouter);
+    
   }
 
   
