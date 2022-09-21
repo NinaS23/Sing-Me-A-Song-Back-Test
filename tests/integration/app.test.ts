@@ -4,6 +4,7 @@ import * as scenarioFactory from "../factories/scenarioFactory";
 import * as recommendationFactory from "../factories/recommendationFactory";
 
 
+
 beforeEach(async () => {
     await scenarioFactory.deleteAllData();
 });
@@ -66,7 +67,14 @@ describe("test Route POST /recommendations/:id/downvote", () => {
 });
 
 describe("test Route GET /recommendations", () => {
-    it.todo("")
+    it("get all recommendations , should returns all of them", async () => {
+        await recommendationFactory.createPreExistentRecommendation();
+        const getAll = await recommendationFactory.getAll()
+        expect(getAll.length).toEqual(9)
+        const getRecommendations = await server
+            .get("/recommendations")
+        expect(getRecommendations.body).toBeInstanceOf(Array)
+    })
 });
 
 describe("test Route GET /recommendations/:id", () => {
