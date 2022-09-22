@@ -129,7 +129,6 @@ describe("get radom recommendation", () => {
         jest.spyOn(Math, 'random').mockImplementationOnce(() : any =>{
          return 0.5
         } );
-
         jest
             .spyOn(recommendationRepository, 'findAll')
             .mockImplementationOnce((): any => {
