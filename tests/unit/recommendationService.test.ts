@@ -92,8 +92,17 @@ describe("get recommendations", () => {
     });
 });
 
-describe("", () => {
-    it.todo("",);
+describe("get recommendation by id", () => {
+    it("should return a recommendation with a specific id", async () => {
+        const inputRecommendation = recommendationFactory.unitRecommendationData();
+        jest
+            .spyOn(recommendationRepository, "find")
+            .mockResolvedValueOnce({ ...inputRecommendation });
+        const getRecommendation = await recommendationService.getById(inputRecommendation.id);
+        expect(getRecommendation.id).toEqual(inputRecommendation.id)
+        expect(getRecommendation).not.toBeNull()
+        
+    });
 });
 
 describe("", () => {
