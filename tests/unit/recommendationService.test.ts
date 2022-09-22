@@ -8,6 +8,8 @@ beforeEach(() => {
     jest.resetAllMocks();
 });
 
+
+
 describe("creation", () => {
     it("should insert a recommendation", async () => {
         jest.spyOn(recommendationRepository, "findByName")
@@ -59,7 +61,7 @@ describe("downvote", () => {
 
         expect(recommendationRepository.remove).toBeCalledTimes(1);
     });
-    
+
     it("should not remove a recommendation with score > -5", async () => {
         const inputRecommendation = recommendationFactory.unitRecommendationData();
         jest
@@ -81,7 +83,7 @@ describe("downvote", () => {
 
 describe("get recommendations", () => {
     it("shoul find all recomendations", async () => {
-       const allRecommendations = recommendationFactory.CreateUnitRecommendations()
+        const allRecommendations = recommendationFactory.CreateUnitRecommendations()
         jest
             .spyOn(recommendationRepository, "findAll")
             .mockImplementationOnce((): any => { return allRecommendations });
@@ -102,12 +104,42 @@ describe("get recommendation by id", () => {
         expect(getRecommendation.id).toEqual(inputRecommendation.id)
         expect(getRecommendation).not.toBeNull()
         expect(recommendationRepository.find).toHaveBeenCalledTimes(1);
-        
+
     });
 });
 
-describe("", () => {
-    it.todo("",);
+describe("get radom recommendation", () => {
+    it("should get random recommendation lte", async () => {
+        const recomendation = recommendationFactory.unitRecommendationData()
+        jest.spyOn(Math, 'random').mockImplementationOnce(() => 0.9);
+        jest
+            .spyOn(recommendationRepository, 'findAll')
+            .mockImplementationOnce((): any => {
+                return [recomendation];
+            });
+        jest.spyOn(Math, 'floor').mockImplementationOnce(() => 0);
+
+        const random = await recommendationService.getRandom();
+        expect(random).toEqual(recomendation);
+
+    });
+
+    it('should get random recommendation gt', async () => {
+        const recomendation = recommendationFactory.unitRecommendationData()
+        jest.spyOn(Math, 'random').mockImplementationOnce(() => 0.5);
+
+        jest
+            .spyOn(recommendationRepository, 'findAll')
+            .mockImplementationOnce((): any => {
+                return [recomendation];
+            });
+        jest.spyOn(Math, 'floor').mockImplementationOnce(() => 0);
+        const random = await recommendationService.getRandom();
+        expect(random).toEqual(recomendation);
+
+    });
+
+   
 });
 
 describe("", () => {

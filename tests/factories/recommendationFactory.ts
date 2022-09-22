@@ -62,6 +62,15 @@ export function unitRecommendationData(){
     }
   )
 }
+export function gtUnitTest() {
+  return {
+    id: 1,
+    name: faker.name.fullName(),
+    youtubeLink: 'https://youtu.be/qrBz29PeqGI',
+    score: -6
+  }
+};
+
 
 export function CreateUnitRecommendations(){
    let allRecommendations = []
@@ -70,9 +79,12 @@ export function CreateUnitRecommendations(){
       id: i,
       name: faker.name.fullName(),
       youtubeLink: `https://www.youtube.com/watch?v=${faker.random.alphaNumeric(11)}`,
-      score:6 
+      score: 9 + i 
     }
     allRecommendations.push(recommendation)
    }
    return allRecommendations;
 }
+
+
+
