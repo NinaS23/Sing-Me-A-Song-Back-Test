@@ -2,6 +2,7 @@ import { jest } from "@jest/globals";
 
 
 beforeEach(() => {
+    console.log("dentro do mock")
     jest.clearAllMocks();
     jest.resetAllMocks();
 });
