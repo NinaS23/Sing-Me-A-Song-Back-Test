@@ -27,7 +27,18 @@ describe("creation", () => {
 });
 
 describe("upvote", () => {
-    it.todo("should update a upvote")
+    it("should update a upvote", async () => {
+        const inputRecommendation = recommendationFactory.unitRecommendationData();
+        jest
+            .spyOn(recommendationRepository, "find")
+            .mockResolvedValueOnce(inputRecommendation);
+        jest
+            .spyOn(recommendationRepository, "updateScore")
+            .mockResolvedValueOnce(null);
+        await recommendationService.upvote(inputRecommendation.id);
+        expect(recommendationRepository.updateScore).toBeCalled();
+
+    })
 });
 
 describe("", () => {
