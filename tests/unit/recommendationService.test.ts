@@ -142,6 +142,23 @@ describe("get radom recommendation", () => {
    
 });
 
-describe("", () => {
-    it.todo("",);
+describe("get recommendation amount", () => {
+    it("should get a amount number of recommendations ordered by top scores",async () =>{
+        const recomendations = recommendationFactory.CreateUnitRecommendations()
+        const amount = 4
+        jest
+        .spyOn(recommendationRepository, 'getAmountByScore').mockImplementationOnce( () : any =>{
+            return [
+                recomendations[0],
+                recomendations[1],
+                recomendations[2],
+                recomendations[3]
+            ]
+        })
+        const result = await recommendationService.getTop(amount);  
+        expect(result.length).toEqual(amount);
+        expect(result).not.toBe(null);
+        expect(recommendationRepository.getAmountByScore).toHaveBeenCalledTimes(1);
+    
+    });
 });
