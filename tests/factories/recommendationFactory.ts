@@ -51,3 +51,14 @@ export async function updateXScores(X: number, update: number) {
   await createPreExistentRecommendation()
   await prisma.recommendation.updateMany({ data: { score: update } });
 }
+
+export function unitRecommendationData(){
+  return(
+   {
+      id: 1,
+      name: "Test",
+      score: 5,
+      youtubeLink: "http://www.youtube.com",
+    }
+  )
+}

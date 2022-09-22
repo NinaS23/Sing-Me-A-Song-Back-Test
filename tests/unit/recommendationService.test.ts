@@ -15,16 +15,19 @@ describe("creation", () => {
         jest.spyOn(recommendationRepository, "create")
             .mockImplementationOnce((): any => { });
 
-        let inputRecommendation = recommendationFactory.createDataRecommendation();
-        await recommendationService.insert(inputRecommendation)
+        let inputRecommendation = recommendationFactory.unitRecommendationData();
+        await recommendationService.insert({
+            name: inputRecommendation.name,
+            youtubeLink: inputRecommendation.youtubeLink
+        })
 
         expect(recommendationRepository.findByName).toBeCalled()
         expect(recommendationRepository.create).toBeCalled()
     });
 });
 
-describe("", () => {
-    it.todo("",);
+describe("upvote", () => {
+    it.todo("should update a upvote")
 });
 
 describe("", () => {
