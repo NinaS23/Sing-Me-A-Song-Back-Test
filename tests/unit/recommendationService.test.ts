@@ -101,6 +101,7 @@ describe("get recommendation by id", () => {
         const getRecommendation = await recommendationService.getById(inputRecommendation.id);
         expect(getRecommendation.id).toEqual(inputRecommendation.id)
         expect(getRecommendation).not.toBeNull()
+        expect(recommendationRepository.find).toHaveBeenCalledTimes(1);
         
     });
 });
