@@ -111,13 +111,17 @@ describe("get recommendation by id", () => {
 describe("get radom recommendation", () => {
     it("should get random recommendation lte", async () => {
         const recomendation = recommendationFactory.unitRecommendationData()
-        jest.spyOn(Math, 'random').mockImplementationOnce(() => 0.9);
+        jest.spyOn(Math, 'random').mockImplementationOnce((): any => {
+            return 0.9
+        });
         jest
             .spyOn(recommendationRepository, 'findAll')
             .mockImplementationOnce((): any => {
                 return [recomendation];
             });
-        jest.spyOn(Math, 'floor').mockImplementationOnce(() => 0);
+            jest.spyOn(Math, 'random').mockImplementationOnce((): any => {
+                return 0
+            });
 
         const random = await recommendationService.getRandom();
         expect(random).toEqual(recomendation);
@@ -126,8 +130,8 @@ describe("get radom recommendation", () => {
 
     it('should get random recommendation gt', async () => {
         const recomendation = recommendationFactory.unitRecommendationData()
-        jest.spyOn(Math, 'random').mockImplementationOnce(() : any =>{
-         return 0.5
+        jest.spyOn(Math, 'random').mockImplementationOnce((): any => {
+            return 0.5
         });
         jest
             .spyOn(recommendationRepository, 'findAll')
@@ -135,7 +139,9 @@ describe("get radom recommendation", () => {
                 return [recomendation];
             });
 
-        jest.spyOn(Math, 'floor').mockImplementationOnce(() => 0);
+        jest.spyOn(Math, 'floor').mockImplementationOnce((): any => {
+            return 0
+        });
         const random = await recommendationService.getRandom();
         expect(random).toEqual(recomendation);
 
