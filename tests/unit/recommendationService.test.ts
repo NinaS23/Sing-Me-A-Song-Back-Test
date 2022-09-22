@@ -126,7 +126,9 @@ describe("get radom recommendation", () => {
 
     it('should get random recommendation gt', async () => {
         const recomendation = recommendationFactory.unitRecommendationData()
-        jest.spyOn(Math, 'random').mockImplementationOnce(() => 0.5);
+        jest.spyOn(Math, 'random').mockImplementationOnce(() : any =>{
+         return 0.5
+        } );
 
         jest
             .spyOn(recommendationRepository, 'findAll')
@@ -149,10 +151,10 @@ describe("get recommendation amount", () => {
         jest
         .spyOn(recommendationRepository, 'getAmountByScore').mockImplementationOnce( () : any =>{
             return [
-                recomendations[0],
-                recomendations[1],
+                recomendations[3],
                 recomendations[2],
-                recomendations[3]
+                recomendations[1],
+                recomendations[0]
             ]
         })
         const result = await recommendationService.getTop(amount);  
