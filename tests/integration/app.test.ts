@@ -13,7 +13,7 @@ const server = supertest(app);
 describe("test Route POST /recommendations", () => {
     it("create a recommendation , send correct format , it should return 201", async () => {
         await recommendationFactory.createPreExistentRecommendation();
-        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const getRecommendation =  recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server
@@ -25,7 +25,7 @@ describe("test Route POST /recommendations", () => {
     });
 
     it("create a recommendation , send incorrect format , it should return 422", async () => {
-        const wrongData = await recommendationFactory.wrongDataRecommendation()
+        const wrongData =  recommendationFactory.wrongDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(wrongData.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server
@@ -34,14 +34,14 @@ describe("test Route POST /recommendations", () => {
         expect(createRecommendation.statusCode).toBe(422);
     });
     it("create a recommendation ,with a existent name , it should return 409", async () => {
-        const getRecommendationData = await recommendationFactory.existentNameRecommendation()
+        const getRecommendationData =  recommendationFactory.existentNameRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendationData.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server
             .post("/recommendations")
             .send(getRecommendationData)
         expect(createRecommendation.statusCode).toBe(201);
-        const existentNameRecommendation = await recommendationFactory.existentNameRecommendation()
+        const existentNameRecommendation =  recommendationFactory.existentNameRecommendation()
         const notUnique = await recommendationFactory.findRecommendation(existentNameRecommendation.name)
         expect(notUnique).not.toBeNull()
         const createAexistentRecommendation = await server
@@ -54,7 +54,7 @@ describe("test Route POST /recommendations", () => {
 describe("test Route POST /recommendations/:id/upvote", () => {
     it("update vote with a valid id for upvote", async () => {
         await recommendationFactory.createPreExistentRecommendation();
-        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const getRecommendation =  recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server
@@ -82,7 +82,7 @@ describe("test Route POST /recommendations/:id/upvote", () => {
 describe("test Route POST /recommendations/:id/downvote", () => {
     it("update vote with a valid id for downvote", async () => {
         await recommendationFactory.createPreExistentRecommendation();
-        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const getRecommendation =  recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server
@@ -134,7 +134,7 @@ describe("test Route GET /recommendations", () => {
 describe("test Route GET /recommendations/:id", () => {
     it("get recommendation with a existent id", async () => {
         await recommendationFactory.createPreExistentRecommendation();
-        const getRecommendation = await recommendationFactory.createDataRecommendation()
+        const getRecommendation =  recommendationFactory.createDataRecommendation()
         const isRecommendationUnique = await recommendationFactory.findRecommendation(getRecommendation.name)
         expect(isRecommendationUnique).toBeNull()
         const createRecommendation = await server

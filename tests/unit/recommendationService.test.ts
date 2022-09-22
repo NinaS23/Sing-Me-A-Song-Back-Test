@@ -128,12 +128,13 @@ describe("get radom recommendation", () => {
         const recomendation = recommendationFactory.unitRecommendationData()
         jest.spyOn(Math, 'random').mockImplementationOnce(() : any =>{
          return 0.5
-        } );
+        });
         jest
             .spyOn(recommendationRepository, 'findAll')
             .mockImplementationOnce((): any => {
                 return [recomendation];
             });
+
         jest.spyOn(Math, 'floor').mockImplementationOnce(() => 0);
         const random = await recommendationService.getRandom();
         expect(random).toEqual(recomendation);
