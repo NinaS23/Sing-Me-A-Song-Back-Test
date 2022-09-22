@@ -56,7 +56,7 @@ export function unitRecommendationData(){
   return(
    {
       id: 1,
-      name: "Test",
+      name: "workDev",
       score: 4,
       youtubeLink: "http://www.youtube.com",
     }
