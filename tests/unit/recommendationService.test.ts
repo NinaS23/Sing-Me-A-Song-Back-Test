@@ -79,8 +79,16 @@ describe("downvote", () => {
     });
 });
 
-describe("", () => {
-    it.todo("",);
+describe("get recommendations", () => {
+    it("shoul find 9 recomendations", async () => {
+        let allRecommendations = await recommendationFactory.createPreExistentRecommendation()
+        jest
+            .spyOn(recommendationRepository, "findAll")
+            .mockImplementationOnce((): any => { return allRecommendations });
+        const getAllRecommendations = await recommendationService.get()
+        expect(getAllRecommendations).toEqual(allRecommendations);
+
+    });
 });
 
 describe("", () => {
