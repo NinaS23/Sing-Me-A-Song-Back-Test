@@ -80,13 +80,14 @@ describe("downvote", () => {
 });
 
 describe("get recommendations", () => {
-    it("shoul find 9 recomendations", async () => {
-        let allRecommendations = await recommendationFactory.createPreExistentRecommendation()
+    it("shoul find all recomendations", async () => {
+       const allRecommendations = recommendationFactory.CreateUnitRecommendations()
         jest
             .spyOn(recommendationRepository, "findAll")
             .mockImplementationOnce((): any => { return allRecommendations });
         const getAllRecommendations = await recommendationService.get()
-        expect(getAllRecommendations).toEqual(allRecommendations);
+        expect(getAllRecommendations.length).toEqual(10)
+        expect(getAllRecommendations).toEqual(allRecommendations)
 
     });
 });

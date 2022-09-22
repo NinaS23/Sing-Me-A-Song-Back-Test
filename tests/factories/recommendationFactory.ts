@@ -62,3 +62,17 @@ export function unitRecommendationData(){
     }
   )
 }
+
+export function CreateUnitRecommendations(){
+   let allRecommendations = []
+   for(let i = 0; i < 10; i++){
+    let recommendation  = {
+      id: i,
+      name: faker.name.fullName(),
+      youtubeLink: `https://www.youtube.com/watch?v=${faker.random.alphaNumeric(11)}`,
+      score:6 
+    }
+    allRecommendations.push(recommendation)
+   }
+   return allRecommendations;
+}
