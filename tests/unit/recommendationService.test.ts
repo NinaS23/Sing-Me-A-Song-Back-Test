@@ -41,8 +41,42 @@ describe("upvote", () => {
     })
 });
 
-describe("", () => {
-    it.todo(" ",);
+describe("downvote", () => {
+    it("should remove a recommendation with score < -5", async () => {
+        const inputRecommendation = recommendationFactory.unitRecommendationData();
+        jest
+            .spyOn(recommendationRepository, "find")
+            .mockResolvedValueOnce({ ...inputRecommendation });
+        jest
+            .spyOn(recommendationRepository, "updateScore")
+            .mockResolvedValueOnce({ score: -6 } as any);
+        jest
+            .spyOn(recommendationRepository, "remove")
+            .mockImplementationOnce((): any => { });
+
+        const downvoteValue = 1
+        await recommendationService.downvote(downvoteValue);
+
+        expect(recommendationRepository.remove).toBeCalledTimes(1);
+    });
+    
+    it("should not remove a recommendation with score > -5", async () => {
+        const inputRecommendation = recommendationFactory.unitRecommendationData();
+        jest
+            .spyOn(recommendationRepository, "find")
+            .mockResolvedValueOnce({ ...inputRecommendation });
+        jest
+            .spyOn(recommendationRepository, "updateScore")
+            .mockResolvedValueOnce({ score: 7 } as any);
+        jest
+            .spyOn(recommendationRepository, "remove")
+            .mockImplementationOnce((): any => { });
+
+        const downvoteValue = 1
+        await recommendationService.downvote(downvoteValue);
+
+        expect(recommendationRepository.remove).toBeCalledTimes(0);
+    });
 });
 
 describe("", () => {
