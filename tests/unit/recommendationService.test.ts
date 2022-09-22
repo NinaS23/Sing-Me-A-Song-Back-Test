@@ -1,7 +1,7 @@
 import { jest } from "@jest/globals";
 import { recommendationRepository } from "../../src/repositories/recommendationRepository.js";
 import { recommendationService } from "../../src/services/recommendationsService";
-import * as recommendationFactory from "../factories/recommendationUnitFactory.js";
+import * as recommendationFactory from "../factories/recommendationFactory.js";
 
 beforeEach(() => {
     jest.clearAllMocks();
@@ -15,9 +15,9 @@ describe("creation", () => {
         jest.spyOn(recommendationRepository, "create")
             .mockImplementationOnce((): any => { });
 
-        let inputRecommendation = recommendationFactory.createDataRecommendationUnit();
+        let inputRecommendation = recommendationFactory.createDataRecommendation();
         await recommendationService.insert(inputRecommendation)
-        
+
         expect(recommendationRepository.findByName).toBeCalled()
         expect(recommendationRepository.create).toBeCalled()
     });

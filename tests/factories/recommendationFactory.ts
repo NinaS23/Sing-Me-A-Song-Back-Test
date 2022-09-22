@@ -3,21 +3,21 @@ import { prisma } from "../../src/database";
 import { Recommendation } from "@prisma/client";
 
 
-export async function createDataRecommendation() {
+export  function createDataRecommendation() {
   return {
     name: faker.name.fullName(),
     youtubeLink: `https://www.youtube.com/watch?v=${faker.random.alphaNumeric(11)}`,
   };
 }
 
-export async function wrongDataRecommendation() {
+export  function wrongDataRecommendation() {
   return {
     name: faker.name.fullName(),
     youtubeLink: `http://www.google.com/${faker.random.alphaNumeric(11)}`,
   };
 }
 
-export async function existentNameRecommendation() {
+export  function existentNameRecommendation() {
   return {
     name: "lolapaloozaaaa",
     youtubeLink: `https://www.youtube.com/watch?v=${faker.random.alphaNumeric(11)}`,
