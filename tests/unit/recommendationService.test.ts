@@ -8,8 +8,6 @@ beforeEach(() => {
     jest.resetAllMocks();
 });
 
-
-
 describe("creation", () => {
     it("should insert a recommendation", async () => {
         jest.spyOn(recommendationRepository, "findByName")
