@@ -1,7 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { prisma } from "../../src/database";
-import { Recommendation } from "@prisma/client";
-
+import { prisma } from "../../src/database.js";
 
 export  function createDataRecommendation() {
   return {
@@ -85,6 +83,5 @@ export function CreateUnitRecommendations(){
    }
    return allRecommendations;
 }
-
 
 
