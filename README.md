@@ -36,6 +36,7 @@ git clone https://github.com/NinaS23/Sing-Me-A-Song-Back-Test.git
 ```
 
 # navigate to the project folder and create .env and .env.test with this inside those files :
+
 ```git
 - .env
 $ PORT = 6003
@@ -51,8 +52,10 @@ $ DATABASE_URL = postgres://{user}:{password}@{hostname}:{port}/{database-name-t
 $ SECRET_KEY = nome_da_chave
 $ NODE_ENV='test'
 ```
-# run that command to genarate database tables 
-$ npx prisma migrate dev
+# then ,run that command to genarate database tables 
+```git
+ npx prisma migrate dev
+```
 
 Then, run the following command to start project:
 
