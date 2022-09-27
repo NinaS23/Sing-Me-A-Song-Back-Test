@@ -41,7 +41,7 @@ navigate to the project folder and create .env and .env.test with this inside th
 - .env
 $ PORT = 6003
 $ DATABASE_URL = postgres://{user}:{password}@{hostname}:{port}/{database-name};
-$ SECRET_KEY = nome_da_chave
+$ SECRET_KEY = secret key
 $ NODE_ENV='prod'
 ```
 
@@ -49,7 +49,7 @@ $ NODE_ENV='prod'
 - .env.test
 $ PORT = 6003
 $ DATABASE_URL = postgres://{user}:{password}@{hostname}:{port}/{database-name-test};
-$ SECRET_KEY = nome_da_chave
+$ SECRET_KEY = secret key 
 $ NODE_ENV='test'
 ```
  then ,run that command to genarate database tables 
