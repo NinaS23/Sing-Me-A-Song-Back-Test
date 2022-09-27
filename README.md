@@ -62,3 +62,17 @@ Then, run the following command to start project:
 ```git
 npm run dev 
 ```
+
+
+# tests 
+
+for unit tests , run the command 
+
+```git
+npm run test:unit
+```
+for integration tests, run the command 
+
+```git
+npm run test:unit
+```
