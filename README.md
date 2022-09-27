@@ -74,5 +74,9 @@ npm run test:unit
 for integration tests, run the command 
 
 ```git
-npm run test:unit
+npm run test:integration
 ```
+for both of them , run the command :
+ ``` git
+ npm test
+ ```
