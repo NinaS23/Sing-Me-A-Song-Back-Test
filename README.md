@@ -52,7 +52,7 @@ $ DATABASE_URL = postgres://{user}:{password}@{hostname}:{port}/{database-name-t
 $ SECRET_KEY = secret key 
 $ NODE_ENV='test'
 ```
- then ,run that command to genarate database tables 
+ then ,run that command to genarate database tables :
 ```git
  npx prisma migrate dev
 ```
@@ -66,12 +66,12 @@ npm run dev
 
 # tests 
 
-for unit tests , run the command 
+for unit tests , run the command :
 
 ```git
 npm run test:unit
 ```
-for integration tests, run the command 
+for integration tests, run the command :
 
 ```git
 npm run test:integration
